@@ -17,6 +17,7 @@ class ReceiptsController < ApplicationController
   # GET /receipts/new
   def new
     @receipt = Receipt.new
+    @receipt.shop_id = params{:id}
   end
 
   # GET /receipts/1/edit
@@ -27,7 +28,7 @@ class ReceiptsController < ApplicationController
   # POST /receipts.json
   def create
     @receipt = Receipt.new(receipt_params)
-
+    @receipt.shop_id = params{:id}
     respond_to do |format|
       if @receipt.save
         format.html { redirect_to @receipt, notice: 'Receipt was successfully created.' }
@@ -71,6 +72,6 @@ class ReceiptsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def receipt_params
-      params.require(:receipt).permit(:purchasedate, :paymentmethode)
+      params.require(:receipt).permit(:purchasedate, :paymentmethode, :shop_id)
     end
 end

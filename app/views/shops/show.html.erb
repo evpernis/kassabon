@@ -1,4 +1,33 @@
 <p id="notice"><%= notice %></p>
 
+<p>
+  <strong>Name:</strong>
+  <%= params[:id] %>
+  <%= @shop.name %>
+</p>
+<p>bonnetjes</p>
+<table>
+  <thead>
+    <tr>
+      <th>datum</th>
+      <th>betaalwijze</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @receipts.each do |bon| %>
+      <tr>
+        <td><%= bon.purchasedate %></td>
+        <td><%= bon.paymentmethode %></td>
+        <td><%= link_to 'Show', shop %></td>
+        <td><%= link_to 'Edit', edit_shop_path(shop) %></td>
+        <td><%= link_to 'Destroy', shop, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'New Receipt', new_receipt_path(@shop) %>
 <%= link_to 'Edit', edit_shop_path(@shop) %> |
 <%= link_to 'Back', shops_path %>

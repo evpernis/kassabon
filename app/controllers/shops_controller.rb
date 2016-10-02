@@ -10,6 +10,7 @@ class ShopsController < ApplicationController
   # GET /shops/1
   # GET /shops/1.json
   def show
+    @receipts = Receipt.select {|a| a.shop_id = params[:id]}
   end
 
   # GET /shops/new
@@ -69,6 +70,7 @@ class ShopsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def shop_params
-      params.fetch(:shop, {})
+#      params.fetch(:shop, {})
+      params.require(:shop).permit(:name)
     end
 end
